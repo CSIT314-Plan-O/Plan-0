@@ -133,4 +133,8 @@ public class Pomodoro extends AppCompatActivity {
         builder.create().show();
 
     }
+
+    public void goBack(View view){
+        finish();
+    }
 }
