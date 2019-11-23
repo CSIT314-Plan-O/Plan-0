@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_reminder"
+            android:icon="@drawable/reminders"
+            android:title="Reminders" />
+        <item
+            android:id="@+id/nav_task"
+            android:icon="@drawable/tasks"
+            android:title="Tasks" />
+        <item
+            android:id="@+id/nav_pomodoro"
+            android:icon="@drawable/ic_timer"
+            android:title="Pomodoro Timer" />
+    </group>
+
+    <item android:title="_______">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_feedback_and_support"
+                android:icon="@drawable/feedback_and_support"
+                android:title="Feedback &amp; Support"/>
+            <item
+                android:id="@+id/nav_privacy"
+                android:icon="@drawable/privacy"
+                android:title="Privacy"/>
+            <item
+                android:id="@+id/nav_terms_and_condition"
+                android:icon="@drawable/terms_and_condition"
+                android:title="Terms &amp; Condition" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout"/>
+        </menu>
+    </item>
+
+
+</menu>
