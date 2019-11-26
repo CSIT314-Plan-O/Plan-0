@@ -3,4 +3,22 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="spinner_prompt">Select</string>
+    <string-array name="subject_list">
+        <item>CSIT111</item>
+        <item>CSIT113</item>
+        <item>CSIT114</item>
+        <item>CSIT128</item>
+        <item>CSIT115</item>
+        <item>CSIT212</item>
+        <item>CSIT314</item>
+    </string-array>
+
+    <string-array name="task_type_list">
+        <item>Homework</item>
+        <item>Project</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
