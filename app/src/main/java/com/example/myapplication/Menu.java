@@ -13,18 +13,26 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //for floating button
+    private static final int TASKS = 0;
+    private static final int REMINDERS = 1;
+
+    int index;
     NavigationView navigationView;
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
+    FloatingActionButton fab;
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleSignInClient mGoogleSignInClient;
@@ -39,6 +47,23 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fab =(FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                if (index == TASKS){
+                    intent = new Intent(Menu.this, AddReminder.class);
+                    startActivity(intent);
+                }
+                else if (index == REMINDERS){
+                    intent = new Intent(Menu.this, AddTask.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -81,10 +106,12 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_reminder:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReminderFragment()).commit();
+                index=0;
                 break;
             case R.id.nav_task:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TaskFragment()).commit();
+                index=1;
                 break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));
