@@ -24,18 +24,6 @@
                 android:icon="@drawable/settings"
                 android:title="Settings" />
             <item
-                android:id="@+id/nav_feedback_and_support"
-                android:icon="@drawable/feedback_and_support"
-                android:title="Feedback &amp; Support"/>
-            <item
-                android:id="@+id/nav_privacy"
-                android:icon="@drawable/privacy"
-                android:title="Privacy"/>
-            <item
-                android:id="@+id/nav_terms_and_condition"
-                android:icon="@drawable/terms_and_condition"
-                android:title="Terms &amp; Condition" />
-            <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"
                 android:title="Logout"/>
