@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
+    BottomNavigationView bottomNavigationMenu;
     FloatingActionButton fab;
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -65,6 +67,12 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
+        //bottom navigation view
+        bottomNavigationMenu = findViewById(R.id.bottom_navigation);
+        bottomNavigationMenu.clearAnimation();
+        bottomNavigationMenu.setOnNavigationItemSelectedListener(navListener);
+
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -73,6 +81,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        //set instance of firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -92,29 +101,62 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             }
         };
 
+
+        //set default fragment
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ReminderFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_reminder);
+                    new ExamFragment()).commit();
+            navigationView.setCheckedItem(R.id.action_exam);
         }
 
     }
 
+    //bottom navigation view
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment selectedFragment = null;
+
+                    switch(menuItem.getItemId()){
+                        case R.id.action_exam:
+                            selectedFragment = new ExamFragment();
+                            break;
+                        case R.id.action_calendar:
+                            selectedFragment = new CalendarFragment();
+                            break;
+                        case R.id.action_task:
+                            selectedFragment = new TaskFragment();
+                            index=0;
+                            break;
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+
+                    return true;
+                }
+            };
+
+    //navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_reminder:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReminderFragment()).commit();
-                index=0;
+                index=1;
                 break;
             case R.id.nav_task:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new TaskFragment()).commit();
-                index=1;
+                index=0;
                 break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));
+                break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, Settings.class));
                 break;
             case R.id.nav_logout:
                 mFirebaseAuth.signOut();
