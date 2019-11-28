@@ -21,4 +21,5 @@
         <item>Other</item>
     </string-array>
 
+    <string name="empty_fragment_string">There\'s nothing here! Tap on the plus to add new to-do items.</string>
 </resources>
