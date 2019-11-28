@@ -39,6 +39,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleSignInClient mGoogleSignInClient;
 
+    ToDoListFragment tasksFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         };
 
 
+
         //set default fragment
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -127,6 +130,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                             break;
                         case R.id.action_task:
                             selectedFragment = new TaskFragment();
+                            //tasksFragment = new ToDoListFragment();
                             index=0;
                             break;
                     }
@@ -182,6 +186,10 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             super.onBackPressed();
         }
 
+    }
+
+    public void goToProfile(View view){
+        startActivity(new Intent (Menu.this, Profile.class));
     }
 
 }
