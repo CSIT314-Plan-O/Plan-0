@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/selector_card_background">
+
+        <TextView
+            android:id="@+id/color_bar"
+            android:layout_width="5dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/red"/>
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/statusCheckBox"
+            android:layout_toRightOf="@id/statusCheckBox"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:textSize="16sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Subject: Title"/>
+
+        <CheckBox
+            android:id="@+id/statusCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/color_bar"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent">
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleView"
+            android:layout_alignStart="@+id/titleView"
+            android:layout_alignLeft="@id/titleView"
+            android:layout_marginBottom="4dp"
+            android:text="00/00 00:00 AM"/>
+
+        <TextView
+            android:id="@+id/typeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleView"
+            android:layout_toStartOf="@+id/priorityView"
+            android:layout_toLeftOf="@id/priorityView"
+            android:text="QUIZ"/>
+
+        <ImageView
+            android:id="@+id/priorityView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignTop="@id/dateView"
+            android:adjustViewBounds="true"
+            android:maxWidth="18dp"
+            android:maxHeight="18dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/star_empty"
+            android:tint="@color/colorAccent"/>
+
+    </RelativeLayout>
+</FrameLayout>
