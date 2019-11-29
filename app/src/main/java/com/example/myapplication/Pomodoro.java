@@ -2,8 +2,11 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
@@ -19,7 +22,7 @@ public class Pomodoro extends AppCompatActivity {
 
     private static final long START_TIME_IN_MILLIS = 1500000;
     //private static final long START_TIME_IN_MILLIS = 3000;
-
+    private Toolbar toolbar;
     private TextView textViewCountDown;
     private Button buttonStartPause, buttonReset;
 
@@ -35,6 +38,23 @@ public class Pomodoro extends AppCompatActivity {
         textViewCountDown = findViewById(R.id.text_view_countdown);
         buttonStartPause = findViewById(R.id.btn_start_pause);
         buttonReset = findViewById(R.id.btn_reset);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Settings");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        final Drawable goBack = getResources().getDrawable(R.drawable.ic_go_back);
+        goBack.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(goBack);
+
+        //go back button
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         buttonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
