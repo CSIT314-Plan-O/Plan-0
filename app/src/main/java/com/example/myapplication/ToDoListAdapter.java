@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
@@ -19,13 +21,15 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class ToDoListAdapter extends BaseAdapter {
+public class ToDoListAdapter extends BaseAdapter{
 
     private final List<ToDoItem> mItems = new ArrayList<ToDoItem>();
     private final Context mContext;
 
     public ToDoListAdapter(Context context) {
+
         mContext = context;
+
     }
 
     public void add(ToDoItem item) {
@@ -106,17 +110,17 @@ public class ToDoListAdapter extends BaseAdapter {
 
         if (subject == null || subject.equals("Other"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grey));
-        else if (subject.equals("English"))
+        else if (subject.equals("CSIT111"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
-        else if (subject.equals("Calculus"))
+        else if (subject.equals("CSIT113"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.orange));
-        else if (subject.equals("Chemistry"))
+        else if (subject.equals("CSIT114"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
-        else if (subject.equals("Physics"))
+        else if (subject.equals("CSIT128"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
-        else if (subject.equals("Economics"))
+        else if (subject.equals("CSIT115"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue));
-        else if (subject.equals("Comp Sci"))
+        else if (subject.equals("CSIT212"))
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.purple));
         else
             colorBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.grey));
