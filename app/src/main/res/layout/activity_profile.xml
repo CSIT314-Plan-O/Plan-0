@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="#2196F3"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,43 +31,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginLeft="162dp"
-        android:layout_marginTop="480dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginRight="162dp"
-        android:onClick="logOut"
-        android:text="logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginLeft="51dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/cantata_one"
         android:text="Fidel Lim"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/circular_image"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/circular_image" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginLeft="49dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cantata_one"
         android:text="abc@gmail.com"
-        app:layout_constraintStart_toEndOf="@+id/circular_image"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="152dp"
+        android:background="@drawable/btn_logout_design"
+        android:drawableStart="@drawable/logout"
+        android:drawableLeft="@drawable/logout"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
