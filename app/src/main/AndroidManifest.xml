@@ -34,6 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignIn"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Pomodoro"
@@ -42,6 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
