@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ToDoListFragment extends ListFragment {
 
     private static final int ADD_TODO_ITEM_REQUEST = 0;
@@ -47,6 +50,8 @@ public class ToDoListFragment extends ListFragment {
         Intent intent = null;
         if (category.contains("Task"))
             intent = new Intent(getActivity(), AddTask.class);
+        else if (category.contains("Exam"))
+            intent = new Intent(getActivity(), AddExam.class);
 
         ToDoItem.packageIntent(intent, toDoItem.getCategory(), toDoItem.getTitle(), toDoItem.getSubject(),
                 toDoItem.getType(), toDoItem.getPriority(), toDoItem.getStatus(), toDoItem.getDate(), toDoItem.getDetails());
