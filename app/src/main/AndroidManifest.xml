@@ -9,16 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".Settings" />
-        <activity android:name=".AddTask" />
-        <activity android:name=".AddReminder" />
+        <activity android:name=".AddExam"
+            android:label="@string/add_exam"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddTask"
+            android:label="@string/add_task"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddReminder"
+            android:label="@string/add_reminder"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Menu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".Pomodoro" />
-        <activity android:name=".Login">
+        <activity
+            android:name=".SignIn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pomodoro"
+            android:label="Pomodoro Timer"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
