@@ -145,34 +145,56 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedFragment = null;
-                    FragmentManager fm;
-                    FragmentTransaction ft;
+                    Fragment selectedFragment = new CalendarFragment();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
                     switch(menuItem.getItemId()){
                         case R.id.action_exam:
                             index = EXAMS;
                             getSupportActionBar().setTitle("Exam");
-                            fm = getFragmentManager();
-                            ft = fm.beginTransaction();
-                            //ft.replace(R.id.fragment_container, examsFragment, "MY_FRAGMENT");
-                            //ft.add(R.id.fragment_container, examsFragment, "MY_FRAGMENT");
-                            ft.show(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
-                            ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
+                            if(fm.findFragmentByTag("MY_FRAGMENT_EXAM") != null) {
+                                //if the fragment exists, show it.
+                                ft.show(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
+                            } else {
+                                //if the fragment does not exist, add it to fragment manager.
+                                ft.add(R.id.fragment_container, tasksFragment,"MY_FRAGMENT_EXAM");
+                            }
+                            if(fm.findFragmentByTag("MY_FRAGMENT_TASK") != null){
+                                //if the other fragment is visible, hide it.
+                                ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
+                            }
+                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_CALENDAR") != null){
+                                //if the other fragment is visible, hide it.
+                                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
+                                        .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
+                            }
                             ft.commit();
                             break;
                         case R.id.action_calendar:
                             getSupportActionBar().setTitle("Calendar");
-                            selectedFragment = new CalendarFragment();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    selectedFragment).commit();
+
+                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_CALENDAR") != null) {
+                                //if the fragment exists, show it.
+                                getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager()
+                                        .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
+                            } else {
+                                //if the fragment does not exist, add it to fragment manager.
+                                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+                                        selectedFragment, "MY_FRAGMENT_CALENDAR").commit();
+                            }
+                            if(fm.findFragmentByTag("MY_FRAGMENT_EXAM") != null){
+                                //if the other fragment is visible, hide it.
+                                ft.hide(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
+                            }
+                            if(fm.findFragmentByTag("MY_FRAGMENT_TASK") != null){
+                                //if the other fragment is visible, hide it.
+                                ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
+                            }
+                            ft.commit();
                             break;
                         case R.id.action_task:
-                            //selectedFragment = new TaskFragment();
-                            //tasksFragment = new ToDoListFragment();
                             index = TASKS;
                             getSupportActionBar().setTitle("Task");
-                            fm = getFragmentManager();
-                            ft = fm.beginTransaction();
                             if(fm.findFragmentByTag("MY_FRAGMENT_TASK") != null) {
                                 //if the fragment exists, show it.
                                 ft.show(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
@@ -183,6 +205,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                             if(fm.findFragmentByTag("MY_FRAGMENT_EXAM") != null){
                                 //if the other fragment is visible, hide it.
                                 ft.hide(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
+                            }
+                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_CALENDAR") != null){
+                                //if the other fragment is visible, hide it.
+                                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
+                                        .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
                             }
                             ft.commit();
                             break;
