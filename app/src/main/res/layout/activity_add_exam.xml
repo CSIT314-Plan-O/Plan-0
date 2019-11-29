@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp">
+
+    <!-- Title -->
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_title_string"
+        android:inputType="textShortMessage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <requestFocus/>
+    </EditText>
+
+    <!-- Subject -->
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="10dp"
+        android:text="@string/subject_string"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/subject_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_toEndOf="@id/subject"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:prompt="@string/spinner_prompt"
+        android:entries="@array/subject_list"/>
+
+    <!-- Type -->
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subject"
+        android:layout_marginTop="12dp"
+        android:layout_alignEnd="@id/subject"
+        android:text="@string/type_string"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subject"
+        android:layout_toEndOf="@id/type"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="12dp"
+        android:prompt="@string/spinner_prompt"
+        android:entries="@array/exam_type_list"/>
+
+
+    <!-- Date -->
+
+    <TextView
+        android:id="@+id/date_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/subject"
+        android:layout_below="@id/type"
+        android:layout_marginTop="12dp"
+        android:text="@string/date_string"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/date_string"
+        android:layout_alignTop="@id/date_string"
+        android:layout_marginStart="12dp"
+        android:text="@string/no_date_set_string"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/date_picker_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/date"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/type"
+        android:text="@string/change_date_string" />
+
+    <!-- Priority -->
+
+    <TextView
+        android:id="@+id/priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/subject"
+        android:layout_below="@id/date"
+        android:layout_marginTop="12dp"
+        android:text="@string/priority_string"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <CheckBox
+        android:id="@+id/priority_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/priority"
+        android:layout_below="@id/date"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"/>
+
+    <!-- Details -->
+    <EditText
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_details_string"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+        android:gravity="top|start"
+        android:maxLines="10"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/priority"
+        android:layout_alignParentStart="true"/>
+</RelativeLayout>
