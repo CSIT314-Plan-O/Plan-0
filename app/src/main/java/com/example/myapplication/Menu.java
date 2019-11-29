@@ -8,8 +8,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,9 +27,17 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //for floating button
+    private static final int ADD_TODO_ITEM_REQUEST = 0;
+    private static final String TAG = "-----------------------";
     private static final int TASKS = 0;
-    private static final int REMINDERS = 1;
+    private static final int EXAMS = 1;
+    private static final int EVENTS = 2;
+    private static final int REMINDERS = 3;
+
+    // IDs for menu items
+    private static final int MENU_DELETE = android.view.Menu.FIRST;
+    private static final int MENU_DUMP = android.view.Menu.FIRST + 1;
+
 
     int index;
     NavigationView navigationView;
@@ -40,12 +51,14 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     private GoogleSignInClient mGoogleSignInClient;
 
     ToDoListFragment tasksFragment;
+    ToDoListFragment examsFragment;
+    ToDoListFragment eventsFragment;
+    ToDoListFragment remindersFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
 
         navigationView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -56,16 +69,14 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent;
-                if (index == TASKS){
+                Intent intent = new Intent();
+                if (index == REMINDERS)
                     intent = new Intent(Menu.this, AddReminder.class);
-                    startActivity(intent);
-                }
-                else if (index == REMINDERS){
+                else if (index == TASKS)
                     intent = new Intent(Menu.this, AddTask.class);
-                    startActivity(intent);
-                }
-
+                else if (index == EXAMS)
+                    intent = new Intent(Menu.this, AddExam.class);
+                startActivityForResult(intent, ADD_TODO_ITEM_REQUEST);
             }
         });
 
@@ -103,15 +114,30 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             }
         };
 
+        tasksFragment = new ToDoListFragment();
+        examsFragment = new ToDoListFragment();
+        eventsFragment = new ToDoListFragment();
+        remindersFragment = new ToDoListFragment();
 
+        index = EXAMS;
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_container, examsFragment, "MY_FRAGMENT_EXAM");
+        ft.commit();
+        navigationView.setCheckedItem(R.id.action_exam);
+        getSupportActionBar().setTitle("Exam");
 
-        //set default fragment
-        if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ExamFragment()).commit();
-            navigationView.setCheckedItem(R.id.action_exam);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        Log.i(TAG, "Entered onActivityResult for Activity");
+
+        ToDoListFragment myFragment = (ToDoListFragment) getFragmentManager().findFragmentByTag("MY_FRAGMENT_EXAM");
+        if (myFragment != null && myFragment.isVisible()) {
+            myFragment.onActivityResult(requestCode, resultCode, data);
         }
-
     }
 
     //bottom navigation view
@@ -120,23 +146,47 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment selectedFragment = null;
-
+                    FragmentManager fm;
+                    FragmentTransaction ft;
                     switch(menuItem.getItemId()){
                         case R.id.action_exam:
-                            selectedFragment = new ExamFragment();
+                            index = EXAMS;
+                            getSupportActionBar().setTitle("Exam");
+                            fm = getFragmentManager();
+                            ft = fm.beginTransaction();
+                            //ft.replace(R.id.fragment_container, examsFragment, "MY_FRAGMENT");
+                            //ft.add(R.id.fragment_container, examsFragment, "MY_FRAGMENT");
+                            ft.show(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
+                            ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
+                            ft.commit();
                             break;
                         case R.id.action_calendar:
+                            getSupportActionBar().setTitle("Calendar");
                             selectedFragment = new CalendarFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    selectedFragment).commit();
                             break;
                         case R.id.action_task:
-                            selectedFragment = new TaskFragment();
+                            //selectedFragment = new TaskFragment();
                             //tasksFragment = new ToDoListFragment();
-                            index=0;
+                            index = TASKS;
+                            getSupportActionBar().setTitle("Task");
+                            fm = getFragmentManager();
+                            ft = fm.beginTransaction();
+                            if(fm.findFragmentByTag("MY_FRAGMENT_TASK") != null) {
+                                //if the fragment exists, show it.
+                                ft.show(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
+                            } else {
+                                //if the fragment does not exist, add it to fragment manager.
+                                ft.add(R.id.fragment_container, tasksFragment,"MY_FRAGMENT_TASK");
+                            }
+                            if(fm.findFragmentByTag("MY_FRAGMENT_EXAM") != null){
+                                //if the other fragment is visible, hide it.
+                                ft.hide(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
+                            }
+                            ft.commit();
                             break;
                     }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            selectedFragment).commit();
 
                     return true;
                 }
@@ -151,20 +201,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                         new ReminderFragment()).commit();
                 index=1;
                 break;
-            case R.id.nav_task:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TaskFragment()).commit();
-                index=0;
-                break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(this, Settings.class));
-                break;
-            case R.id.nav_logout:
-                mFirebaseAuth.signOut();
-                mGoogleSignInClient.signOut();
                 break;
         }
 
