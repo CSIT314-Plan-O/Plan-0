@@ -3,6 +3,10 @@ Student Planner App
 
 Help students with the following features
 
--to-do lists
-
--pomodoro timer
+- Schedule
+- Reminder
+- Study Report
+- Pomodoro Timer
+- Professor
+- Exam
+- Task
