@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Profile extends AppCompatActivity {
 
     Toolbar toolbar;
+    Button btnLogOut;
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleSignInClient mGoogleSignInClient;
@@ -55,6 +57,11 @@ public class Profile extends AppCompatActivity {
         goBack.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(goBack);
 
+
+        Drawable dr = getResources().getDrawable(R.drawable.logout);
+        btnLogOut = findViewById(R.id.btn_logout);
+        dr.setBounds(0,0, 50,50);
+        btnLogOut.setCompoundDrawables(dr, null,null,null);
         //go back button
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
