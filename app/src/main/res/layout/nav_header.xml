@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="176dp"
@@ -8,24 +9,29 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/circular_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:onClick="goToProfile"
         android:src="@mipmap/ic_launcher_round"
-        android:onClick="goToProfile"/>
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="First Name and Last Name"
-        android:textColor="#ffffff"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:text="Fidel Lim"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#020202" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="#0C0C0C"
         android:text="email@gmail.com"/>
 
 </LinearLayout>
