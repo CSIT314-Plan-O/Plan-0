@@ -29,9 +29,10 @@
         android:textColor="#020202" />
 
     <TextView
+        android:id="@+id/headerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#0C0C0C"
-        android:text="email@gmail.com"/>
+        android:text="email@gmail.com"
+        android:textColor="#0C0C0C" />
 
 </LinearLayout>
