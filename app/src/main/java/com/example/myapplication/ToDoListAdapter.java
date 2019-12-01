@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,41 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ToDoListAdapter extends BaseAdapter{
 
+    private static final String KEY_CATEGORY = "Category";
+    private static final String KEY_TITLE = "Title";
+    private static final String KEY_SUBJECT = "Subject";
+    private static final String KEY_TYPE = "Type";
+    private static final String KEY_PRIORITY = "Priority";
+    private static final String KEY_STATUS = "Status";
+    private static final String KEY_CALENDAR = "Calendar";
+    private static final String KEY_DETAILS = "Details";
+    private static final String TAG = "-----------------------";
+
     private final List<ToDoItem> mItems = new ArrayList<ToDoItem>();
     private final Context mContext;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference dbToDoItems = db.collection("ToDoItems");
 
     public ToDoListAdapter(Context context) {
 
@@ -36,6 +59,7 @@ public class ToDoListAdapter extends BaseAdapter{
         mItems.add(item);
         sort("date");
     }
+
 
     public void edit(int position, Bundle extras) {
         ToDoItem item = mItems.get(position);
