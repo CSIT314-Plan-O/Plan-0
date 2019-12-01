@@ -6,22 +6,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignIn extends AppCompatActivity {
 
+    private static final String TAG = "-----------------------";
     private EditText emailText, passwordText, confirmPasswordText;
     private Button btnSignUp;
     FirebaseAuth mFirebaseAuth;
     ProgressDialog progressDialog;
+    private FirebaseFirestore db;
+    DocumentReference documentReference;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +46,7 @@ public class SignIn extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         emailText = (EditText)findViewById(R.id.email);
         passwordText = (EditText) findViewById(R.id.password);
         confirmPasswordText = (EditText) findViewById(R.id.confirmPassword);
@@ -65,10 +81,30 @@ public class SignIn extends AppCompatActivity {
                                     Toast.makeText(SignIn.this, "Signup Unsuccessful", Toast.LENGTH_SHORT);
                                 }else{
                                     Toast.makeText(SignIn.this, "Signup Successful", Toast.LENGTH_LONG);
-                                    FirebaseAuth.getInstance().signOut();
-                                    Intent i = new Intent(getApplicationContext(), Login.class);
-                                    startActivity(i);
+
+                                    //Put user Email in fireStore
+                                    userId = mFirebaseAuth.getCurrentUser().getUid();
+                                    documentReference = db.collection("Users").document(userId);
+
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("Email", emailText.getText().toString());
+
+                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "user Created" );
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(TAG, "onFailure" + e.getMessage());
+                                        }
+                                    });
+
+                                    mFirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(SignIn.this, Login.class));
                                     finish();
+
                                 }
                             }
 
