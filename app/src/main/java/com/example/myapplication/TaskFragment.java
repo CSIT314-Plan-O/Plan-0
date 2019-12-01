@@ -54,10 +54,7 @@ public class TaskFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         mAdapter = new ToDoListAdapter(getActivity());
-        mCalendarDate.set(2019,10,10,1,1,1);
-        mAdapter.add(new ToDoItem(mCategory, mTitle, mSubject, mType, mPriority, mStatus, mCalendarDate, mDetails));
-        mAdapter.add(new ToDoItem("Task", "CSIT314", "Software Methodology", "low", ToDoItem.Priority.HIGH, ToDoItem.Status.DONE, mCalendarDate, mDetails));
-        setListAdapter(mAdapter);
+       setListAdapter(mAdapter);
     }
 
     @Override
