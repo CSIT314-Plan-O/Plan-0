@@ -287,6 +287,9 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = new ReminderFragment();
         switch (menuItem.getItemId()){
+            case R.id.nav_schedule:
+                startActivity(new Intent(this, Schedule.class));
+                break;
             case R.id.nav_reminder:
                 getSupportActionBar().setTitle("Reminder");
                 fm = getFragmentManager();
@@ -314,10 +317,16 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                             .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
                 }
                 ft.commit();
-                index=1;
+                index=REMINDERS;
+                break;
+            case R.id.nav_study_report:
+                startActivity(new Intent(this, StudyReport.class));
                 break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));
+                break;
+            case R.id.nav_professor:
+                startActivity(new Intent(this, Professor.class));
                 break;
             case R.id.nav_profile:
                 startActivity(new Intent(this, Profile.class));
