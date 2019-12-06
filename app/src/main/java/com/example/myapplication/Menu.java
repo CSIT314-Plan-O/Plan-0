@@ -77,7 +77,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         mFirebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         firebaseUser = mFirebaseAuth.getCurrentUser();
-        if(firebaseUser != null){
+        if (firebaseUser != null){
             userId = firebaseUser.getUid();
             documentReference = db.collection("Users").document(userId);
         }
