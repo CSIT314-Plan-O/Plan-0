@@ -112,8 +112,6 @@ public class Login extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Logging in...");
-                progressDialog.show();
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
 
@@ -124,6 +122,8 @@ public class Login extends AppCompatActivity {
                     passwordText.setError("Please enter Password");
                     passwordText.requestFocus();
                 }else if(!(email.isEmpty() && password.isEmpty())){
+                    progressDialog.setMessage("Logging in...");
+                    progressDialog.show();
                     mFirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -138,6 +138,7 @@ public class Login extends AppCompatActivity {
                         }
                     });
                 }else{
+                    progressDialog.dismiss();
                     Toast.makeText(Login.this, "Error occured", Toast.LENGTH_SHORT);
                 }
             }
