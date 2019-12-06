@@ -55,8 +55,7 @@ public class SignIn extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                progressDialog.setMessage("Creating account...");
-                progressDialog.show();
+
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
                 String confirmPassword = confirmPasswordText.getText().toString();
@@ -72,6 +71,8 @@ public class SignIn extends AppCompatActivity {
                     confirmPasswordText.requestFocus();
                 }else if(!(email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty())){
                     //CHECK IF PASSWORD IS >= 6 characters
+                    progressDialog.setMessage("Creating account...");
+                    progressDialog.show();
                     if(password.equals(confirmPassword)){
                         mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -93,6 +94,7 @@ public class SignIn extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d(TAG, "user Created" );
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -100,10 +102,6 @@ public class SignIn extends AppCompatActivity {
                                             Log.d(TAG, "onFailure" + e.getMessage());
                                         }
                                     });
-
-                                    mFirebaseAuth.getInstance().signOut();
-                                    startActivity(new Intent(SignIn.this, Login.class));
-                                    finish();
 
                                 }
                             }
