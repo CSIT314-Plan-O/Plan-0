@@ -43,4 +43,8 @@ public class Settings extends AppCompatActivity {
     public void goToTermsAndCondition (View view){
         startActivity(new Intent(this, TermsAndCondition.class));
     }
+
+    public void goToPrivacy (View view){
+        startActivity(new Intent(this, Privacy.class));
+    }
 }
