@@ -47,4 +47,8 @@ public class Settings extends AppCompatActivity {
     public void goToPrivacy (View view){
         startActivity(new Intent(this, Privacy.class));
     }
+
+    public void goToFeedbackAndSupport (View view){
+        startActivity(new Intent(this, FeedbackAndSupport.class));
+    }
 }

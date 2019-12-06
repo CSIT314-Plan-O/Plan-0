@@ -19,9 +19,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/setting_linear_layout_design"
+        android:onClick="goToFeedbackAndSupport"
         android:orientation="horizontal"
-        android:weightSum="100"
-        android:background="@drawable/setting_linear_layout_design">
+        android:weightSum="100">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -29,24 +30,24 @@
             android:layout_weight="10">
 
             <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/feedback_and_support"
-                android:tint="#000000"/>
+                android:tint="#000000" />
 
         </LinearLayout>
 
         <TextView
-            android:paddingLeft="15dp"
-            android:gravity="center_vertical"
             android:id="@+id/feedback_support"
-            android:layout_weight="90"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:text="Feedback &amp; Support"/>
+            android:layout_weight="90"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="Feedback &amp; Support" />
     </LinearLayout>
 
     <LinearLayout
