@@ -57,44 +57,100 @@
     <string name="empty_fragment_string">There\'s nothing here! Tap on the plus to add new to-do items.</string>
 
     <string name="termsAndCondition">
-        Last updated: 10-10-2019 \n
-Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using
-        the <b>http://www.Plan-O.com</b> website and the My Mobile App (change this) mobile
-application (the "Service") operated by My Company (change this) ("us", "we", or "our").
+Last updated: 10-10-2019 \n
+        Please read these Terms and Conditions carefully before using
+        the <b>http://www.Plan-O.com</b> website and Plan-O mobile
+application (the "Service") operated by Plan-O.
 Your access to and use of the Service is conditioned on your acceptance of and compliance with
-these Terms. These Terms apply to all visitors, users and others who access or use the Service.
-By accessing or using the Service you agree to be bound by these Terms. If you disagree
-with any part of the terms then you may not access the Service.
-Purchases \n
+these Terms. These Terms apply to all visitors, users and others who access or use the Service. \n\n
+
+<b><font size="18">By accessing or using the Service you agree to be bound by these Terms. If you disagree
+with any part of the terms then you may not access the Service. </font></b>\n\n
+
+<b><font size="20">Purchases </font></b>\n\n
 If you wish to purchase any product or service made available through the Service ("Purchase"),
 you may be asked to supply certain information relevant to your Purchase including, without
-limitation, your … \n
+limitation, your …
 The Purchases section is for businesses that sell online (physical or digital). For the full
-disclosure section, create your own Terms and Conditions.
-Subscriptions
+disclosure section, create your own Terms and Conditions. \n\n
+
+<b><font size="20">Subscriptions </font></b>\n\n
 Some parts of the Service are billed on a subscription basis ("Subscription(s)"). You will be billed in
 advance on a recurring …
 The Subscriptions section is for SaaS businesses. For the full disclosure section, create your
-own Terms and Conditions.
-Content \n
+own Terms and Conditions. \n\n
+
+<b><font size="20">Content </font></b>\n\n
 Our Service allows you to post, link, store, share and otherwise make available certain information,
 text, graphics, videos, or other material ("Content"). You are responsible for the …
 The Content section is for businesses that allow users to create, edit, share, make content on
-their websites or apps. For the full disclosure section, create your own Terms and Conditions.
-Links To Other Web Sites
+their websites or apps. For the full disclosure section, create your own Terms and Conditions. \n\n
+
+<b><font size="20">Links To Other Web Sites  </font></b>\n\n
 Our Service may contain links to third-party web sites or services that are not owned or controlled
-by My Company (change this).
+by Plan-O.
 My Company (change this) has no control over, and assumes no responsibility for, the content,
 privacy policies, or practices of any third party web sites or services. You further acknowledge and
 agree that My Company (change this) shall not be responsible or liable, directly or indirectly, for any
 damage or loss caused or alleged to be caused by or in connection with use of or reliance on any
-such content, goods or services available on or through any such web sites or services.
-Changes \n
+such content, goods or services available on or through any such web sites or services. \n\n
+
+<b><font size="20">Changes </font></b>\n\n
 We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a
 revision is material we will try to provide at least 30 (change this) days\' notice prior to any new terms
-taking effect. What constitutes a material change will be determined at our sole discretion. \n
-<b>Contact Us </b>\n
+taking effect. What constitutes a material change will be determined at our sole discretion. \n\n
+        <b><font size="20">Contact Us </font></b>\n\n
 If you have any questions about these Terms, please contact us.
+    </string>
+
+    <string name="privacyText">
+        Last updated: 10-10-2019 \n
+Plan-O operates http://www.Plan-O.com. This page informs you of our policies regarding the collection, use and disclosure of
+Personal Information we receive from users of the Site.
+We use your Personal Information only for providing and improving the Site. By using the Site, you
+agree to the collection and use of information in accordance with this policy. \n\n
+<b><font size="20">Information Collection And Use </font></b>\n\n
+While using our Site, we may ask you to provide us with certain personally identifiable information
+that can be used to contact or identify you. Personally identifiable information may include, but is not
+limited to your name ("Personal Information"). \n\n
+<b><font size="20">Log Data </font></b>\n\n
+Like many site operators, we collect information that your browser sends whenever you visit our Site
+("Log Data").
+This Log Data may include information such as your computer\'s Internet Protocol ("IP") address,
+browser type, browser version, the pages of our Site that you visit, the time and date of your visit,
+the time spent on those pages and other statistics.
+In addition, we may use third party services such as Google Analytics that collect, monitor and
+analyze this …
+The Log Data section is for businesses that use analytics or tracking services in websites or
+apps, like Google Analytics. For the full disclosure section, create your own Privacy Policy. \n\n
+<b><font size="20">Communications </font></b>\n\n
+We may use your Personal Information to contact you with newsletters, marketing or promotional
+materials and other information that …
+The Communications section is for businesses that may contact users via email (email
+newsletters) or other methods. For the full disclosure section, create your own Privacy Policy. \n\n
+<b><font size="20">Cookies  </font></b>\n\n
+Cookies are files with small amount of data, which may include an anonymous unique identifier.
+Cookies are sent to your browser from a web site and stored on your computer\'s hard drive.
+Like many sites, we use "cookies" to collect information. You can instruct your browser to refuse all
+cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may
+not be able to use some portions of our Site. \n\n
+<b><font size="20">Security  </font></b>\n\n
+The security of your Personal Information is important to us, but remember that no method of
+transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to
+use commercially acceptable means to protect your Personal Information, we cannot guarantee its
+absolute security. \n\n
+<b><font size="20">Changes To This Privacy Policy </font></b>\n\n
+This Privacy Policy is effective as of (add date) and will remain in effect except with respect to any
+changes in its provisions in the future, which will be in effect immediately after being posted on this
+page.
+We reserve the right to update or change our Privacy Policy at any time and you should check this
+Privacy Policy periodically. Your continued use of the Service after we post any modifications to the
+Privacy Policy on this page will constitute your acknowledgment of the modifications and your
+consent to abide and be bound by the modified Privacy Policy.
+If we make any material changes to this Privacy Policy, we will notify you either through the email
+address you have provided us, or by placing a prominent notice on our website. \n\n
+<b><font size="20">Contact Us</font></b>\n\n
+If you have any questions about this Privacy Policy, please contact us.
 
     </string>
 </resources>
