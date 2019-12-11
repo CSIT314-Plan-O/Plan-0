@@ -35,6 +35,7 @@ public class AddExam extends AppCompatActivity {
     private static TextView dateView;
     private static Calendar mCalendarDate;
 
+    private Bundle extras;
     private Boolean isEdit;
     private CheckBox mPriorityCheckBox;
     private EditText mTitleText;
@@ -55,14 +56,6 @@ public class AddExam extends AppCompatActivity {
         dateView = (TextView) findViewById(R.id.date);
         isEdit = false;
 
-        Bundle extras = getIntent().getExtras();
-        if (extras == null)
-            setDefaultDateTime();
-        else {
-            isEdit = true;
-            fillData(extras);
-        }
-
         final Button datePickerButton = (Button) findViewById(R.id.date_picker_button);
         datePickerButton.setOnClickListener(new View.OnClickListener() {
 
@@ -71,6 +64,16 @@ public class AddExam extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
+
+        extras = getIntent().getExtras();
+        if (extras == null)
+            setDefaultDateTime();
+        else {
+            isEdit = true;
+            fillData();
+        }
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,8 +93,10 @@ public class AddExam extends AppCompatActivity {
                 String type = mTypeSpinner.getSelectedItem().toString();
 
                 Intent data = new Intent();
-                if (isEdit)
+                if (isEdit){
+                    data.putExtra("position", extras.getInt("position"));
                     ToDoItem.packageIntent(data, "EditExam", title, subject, type, priority, status, mCalendarDate, details);
+                }
                 else
                     ToDoItem.packageIntent(data, "Exam", title, subject, type, priority, status, mCalendarDate, details);
 
@@ -109,7 +114,7 @@ public class AddExam extends AppCompatActivity {
         }
     }
 
-    private void fillData(Bundle extras) {
+    private void fillData() {
         mTitleText.setText(extras.getString(ToDoItem.TITLE));
         mSubjectSpinner.setSelection(((ArrayAdapter) mSubjectSpinner.getAdapter()).getPosition(extras.getString(ToDoItem.SUBJECT)));
         mTypeSpinner.setSelection(((ArrayAdapter) mTypeSpinner.getAdapter()).getPosition(extras.getString(ToDoItem.TYPE)));

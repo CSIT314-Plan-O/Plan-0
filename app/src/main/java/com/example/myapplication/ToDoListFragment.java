@@ -111,7 +111,7 @@ public class ToDoListFragment extends ListFragment {
             if (newItem.getCategory().contains("Edit")) {
                 Bundle extras = data.getExtras();
                 mAdapter.edit(data.getIntExtra("position", 0), extras);
-            } else
+            }else{
                 mAdapter.add(newItem);
 
                 //create map to store in database
@@ -137,6 +137,8 @@ public class ToDoListFragment extends ListFragment {
                         Log.d(TAG, "INSERTION OF DATA IS FAILED");
                     }
                 });
+            }
+
             Log.i(TAG, "added item to adapter");
         }
     }
