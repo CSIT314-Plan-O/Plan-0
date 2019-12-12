@@ -319,14 +319,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 ft.commit();
                 index=REMINDERS;
                 break;
-            case R.id.nav_study_report:
-                startActivity(new Intent(this, StudyReport.class));
-                break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));
-                break;
-            case R.id.nav_professor:
-                startActivity(new Intent(this, Professor.class));
                 break;
             case R.id.nav_profile:
                 startActivity(new Intent(this, Profile.class));

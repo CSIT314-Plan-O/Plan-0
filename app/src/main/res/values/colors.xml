@@ -11,80 +11,26 @@
     <color name="white">#ffffff</color>
 
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#BBDEFB</color>
 
     <color name="red">#F44336</color>
     <color name="redDark">#D32F2F</color>
-    <color name="redAccent">#FF5252</color>
-
-    <color name="pink">#E91E63</color>
-    <color name="pinkDark">#C2185B</color>
-    <color name="pinkAccent">#FF4081</color>
 
     <color name="purple">#9C27B0</color>
     <color name="purpleDark">#7B1FA2</color>
-    <color name="purpleAccent">#E040FB</color>
-
-    <color name="deepPurple">#673AB7</color>
-    <color name="deepPurpleDark">#512DA8</color>
-    <color name="deepPurpleAccent">#7C4Dff</color>
-
-    <color name="indigo">#3F51B5</color>
-    <color name="indigoDark">#303F9F</color>
-    <color name="indigoAccent">#536DFE</color>
 
     <color name="blue">#2196F3</color>
     <color name="blueDark">#1976D2</color>
-    <color name="blueAccent">#448AFF</color>
-
-    <color name="lightBlue">#03A9F4</color>
-    <color name="lightBlueDark">#0288D1</color>
-    <color name="lightBlueAccent">#40C4FF</color>
-
-    <color name="cyan">#00BCD4</color>
-    <color name="cyanDark">#0097A7</color>
-    <color name="cyanAccent">#18FFFF</color>
-
-    <color name="teal">#009688</color>
-    <color name="md_teal_700">#00796B</color>
-    <color name="tealAccent">#64FFDA</color>
 
     <color name="green">#4CAF50</color>
     <color name="greenDark">#388E3C</color>
-    <color name="greenAccent">#00E676</color>
-
-    <color name="lightGreen">#8BC34A</color>
-    <color name="lightGreenDark">#689F38</color>
-    <color name="lightGreenAccent">#76FF03</color>
-
-    <color name="lime">#CDDC39</color>
-    <color name="limeDark">#A4B42B</color>
-    <color name="limeAccent">#EEFF41</color>
 
     <color name="yellow">#FDD835</color>
     <color name="yellowDark">#FBC02D</color>
-    <color name="yellowAccent">#FFFF00</color>
-
-    <color name="amber">#FFC107</color>
-    <color name="amberDark">#FFA000</color>
-    <color name="amberAccent">#FFD740</color>
 
     <color name="orange">#FF9800</color>
     <color name="orangeDark">#F57C00</color>
-    <color name="orangeAccent">#FFAB40</color>
-
-    <color name="deepOrange">#FF5722</color>
-    <color name="deepOrangeDark">#E64A19</color>
-    <color name="deepOrangeAccent">#FF6E40</color>
-
-    <color name="brown">#795548</color>
-    <color name="brownDark">#5D4037</color>
 
     <color name="grey">#9E9E9E</color>
-    <color name="greyDark">#616161</color>
 
-    <color name="blueGrey">#607D8B</color>
-    <color name="blueGreyDark">#455A64</color>
 </resources>
