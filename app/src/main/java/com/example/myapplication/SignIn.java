@@ -67,7 +67,7 @@ public class SignIn extends AppCompatActivity {
                     passwordText.setError("Please enter Password");
                     passwordText.requestFocus();
                 }else if(confirmPassword.isEmpty()){
-                    confirmPasswordText.setError("Confirm password");
+                    confirmPasswordText.setError("Confirm Password");
                     confirmPasswordText.requestFocus();
                 }else if(!(email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty())){
                     //CHECK IF PASSWORD IS >= 6 characters
@@ -79,7 +79,7 @@ public class SignIn extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressDialog.dismiss();
                                 if(!task.isSuccessful()){
-                                    Toast.makeText(SignIn.this, "Signup Unsuccessful", Toast.LENGTH_SHORT);
+                                    passwordText.setError("Password must have more than 6 characters");
                                 }else{
                                     Toast.makeText(SignIn.this, "Signup Successful", Toast.LENGTH_LONG);
 
@@ -109,7 +109,7 @@ public class SignIn extends AppCompatActivity {
                         });
                     }else{
                         progressDialog.dismiss();
-                        Toast.makeText(SignIn.this, "Password is not the same", Toast.LENGTH_LONG);
+                        passwordText.setError("Password is not the same");
                     }
                 }else{
                     progressDialog.dismiss();
