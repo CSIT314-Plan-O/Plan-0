@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class Pomodoro extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 1500000;
+    private static final long START_TIME_IN_MILLIS = 1500000; //25 minutes
     //private static final long START_TIME_IN_MILLIS = 3000;
     private Toolbar toolbar;
     private TextView textViewCountDown;
@@ -97,7 +97,7 @@ public class Pomodoro extends AppCompatActivity {
                 buttonStartPause.setText("start");
                 buttonStartPause.setVisibility(View.INVISIBLE);
                 buttonReset.setVisibility(View.VISIBLE);
-                showForgotPasswordDialog();
+                showStopTimer();
             }
         }.start();
 
@@ -121,7 +121,7 @@ public class Pomodoro extends AppCompatActivity {
         buttonStartPause.setVisibility(View.VISIBLE);
     }
 
-    private void showForgotPasswordDialog(){
+    private void showStopTimer(){
         //AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pomodoro Timer");
