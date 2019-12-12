@@ -12,17 +12,9 @@
             android:icon="@drawable/reminders"
             android:title="Reminder" />
         <item
-            android:id="@+id/nav_study_report"
-            android:icon="@drawable/ic_assessment"
-            android:title="Study Report" />
-        <item
             android:id="@+id/nav_pomodoro"
             android:icon="@drawable/ic_timer"
             android:title="Pomodoro Timer" />
-        <item
-            android:id="@+id/nav_professor"
-            android:icon="@drawable/ic_school"
-            android:title="Professor" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person"
