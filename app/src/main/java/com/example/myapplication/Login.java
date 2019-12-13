@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -129,7 +130,7 @@ public class Login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
                                 progressDialog.dismiss();
-                                Toast.makeText(Login.this, "Please log in again", Toast.LENGTH_SHORT);
+                                emailText.setError("Password or Email is wrong");
                             }else{
                                 progressDialog.dismiss();
                                 Intent i = new Intent(Login.this, Menu.class);
@@ -139,7 +140,7 @@ public class Login extends AppCompatActivity {
                     });
                 }else{
                     progressDialog.dismiss();
-                    Toast.makeText(Login.this, "Error occured", Toast.LENGTH_SHORT);
+
                 }
             }
         });
@@ -263,20 +264,41 @@ public class Login extends AppCompatActivity {
                             //Put user Email in fireStore
                             userId = mFirebaseAuth.getCurrentUser().getUid();
                             documentReference = db.collection("Users").document(userId);
-                            Map<String, Object> user = new HashMap<>();
+
+                            final Map<String, Object> user = new HashMap<>();
                             user.put("Email", mFirebaseAuth.getCurrentUser().getEmail());
 
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "user Created" );
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                    if(documentSnapshot.exists()){
+                                        //check if email exists or not
+                                        //if yes, add it
+                                        if (!documentSnapshot.contains("Email")){
+                                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "user Created" );
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d(TAG, "onFailure" + e.getMessage());
+                                                }
+                                            });
+                                        }
+
+                                    }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure" + e.getMessage());
+                                    Log.d(TAG, "FAILURE " + e.getMessage());
                                 }
                             });
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
