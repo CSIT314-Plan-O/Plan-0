@@ -24,12 +24,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Profile extends AppCompatActivity {
 
+//    private final int requestCode = 1;
     private static final String TAG = "-----------------------";
     Toolbar toolbar;
-    Button btnLogOut;
-    TextView profileEmail;
+    Button btnLogOut, btnEditProfile;
+    Calendar mCalendarDate;
+    TextView profileEmail, profileName, profileBirthdate;
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleSignInClient mGoogleSignInClient;
@@ -44,7 +49,11 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        mCalendarDate = Calendar.getInstance();
+
         profileEmail = findViewById(R.id.profileEmail);
+        profileName = findViewById(R.id.profileName);
+        profileBirthdate = findViewById(R.id.profileBirthdate);
 
         //set instance of firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -91,7 +100,7 @@ public class Profile extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(Profile.this, Menu.class));
             }
         });
 
@@ -101,14 +110,42 @@ public class Profile extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     String email = documentSnapshot.getString("Email");
+                    String name = documentSnapshot.getString("Name");
+                    Date date = documentSnapshot.getDate("Birthdate");
+
+
+                    mCalendarDate.setTime(date);
+
+                    int year = mCalendarDate.get(Calendar.YEAR);
+                    int month = mCalendarDate.get(Calendar.MONTH);
+                    int day = mCalendarDate.get(Calendar.DAY_OF_MONTH);
 
                     profileEmail.setText(email);
+                    profileName.setText(name);
+                    profileBirthdate.setText(day + "/" + (month+1) + "/" +year);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "FAILURE " + e.getMessage());
+            }
+        });
+
+
+        btnEditProfile = findViewById(R.id.btn_edit);
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = profileEmail.getText().toString();
+                String name = profileName.getText().toString();
+                String birthdate = profileBirthdate.getText().toString();
+
+                Intent i = new Intent(Profile.this, EditProfile.class);
+                i.putExtra("Email", email);
+                i.putExtra("Name", name);
+                i.putExtra("Birthdate", birthdate);
+                startActivity(i);
             }
         });
     }
