@@ -36,6 +36,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -265,8 +267,11 @@ public class Login extends AppCompatActivity {
                             userId = mFirebaseAuth.getCurrentUser().getUid();
                             documentReference = db.collection("Users").document(userId);
 
+                            Date date = new Date(); //set date to null
                             final Map<String, Object> user = new HashMap<>();
                             user.put("Email", mFirebaseAuth.getCurrentUser().getEmail());
+                            user.put("Name", "");
+                            user.put("Birthdate", date);
 
                             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
