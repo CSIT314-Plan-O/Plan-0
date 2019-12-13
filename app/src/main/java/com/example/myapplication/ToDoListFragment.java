@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -65,6 +67,8 @@ public class ToDoListFragment extends ListFragment {
     String userId;
     FirebaseUser firebaseUser;
 
+    ListView list;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.list_fragment, container, false);
@@ -73,6 +77,8 @@ public class ToDoListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        list = getView().findViewById(android.R.id.list);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -85,7 +91,27 @@ public class ToDoListFragment extends ListFragment {
 
         mAdapter = new ToDoListAdapter(getActivity());
         setListAdapter(mAdapter);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                SparseBooleanArray positionChecker = list.getCheckedItemPositions();
+                int count = list.getCount();
+
+                for(int item=count-1; item>0; item--){
+                    if(positionChecker.get(item)){
+                        mAdapter.remove(item);
+                    }
+                }
+
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
     }
+
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -195,6 +221,8 @@ public class ToDoListFragment extends ListFragment {
             Log.i(TAG, "added item to adapter");
         }
     }
+
+
 
     @Override
     public void onResume() {
