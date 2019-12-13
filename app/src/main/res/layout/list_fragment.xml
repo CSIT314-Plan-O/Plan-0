@@ -17,6 +17,7 @@
         android:clickable="true"
         android:headerDividersEnabled="true"
         android:footerDividersEnabled="true"
+        android:choiceMode="multipleChoice"
         />
 
     <TextView
