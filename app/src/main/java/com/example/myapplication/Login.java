@@ -270,7 +270,7 @@ public class Login extends AppCompatActivity {
                             Date date = new Date(); //set date to null
                             final Map<String, Object> user = new HashMap<>();
                             user.put("Email", mFirebaseAuth.getCurrentUser().getEmail());
-                            user.put("Name", "");
+                            user.put("Name", mFirebaseAuth.getCurrentUser().getDisplayName());
                             user.put("Birthdate", date);
 
                             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
