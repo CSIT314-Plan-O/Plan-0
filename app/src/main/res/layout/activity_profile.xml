@@ -23,7 +23,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/tomato"
         app:civ_border_color="#95E4F5"
@@ -32,34 +31,45 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/cantata_one"
-        android:text="Fidel Lim"
+        android:text="test"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/circular_image"
-        app:layout_constraintTop_toTopOf="@+id/circular_image" />
+        app:layout_constraintStart_toStartOf="@+id/profileEmail"
+        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+
+    <TextView
+        android:id="@+id/profileBirthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/cantata_one"
+        android:text="test"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/profileName"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <TextView
         android:id="@+id/profileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="64dp"
         android:fontFamily="@font/cantata_one"
         android:text="abc@gmail.com"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/circular_image"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginEnd="152dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="102dp"
         android:background="@drawable/btn_logout_design"
         android:drawableStart="@drawable/logout"
         android:drawableLeft="@drawable/logout"
@@ -68,8 +78,24 @@
         android:paddingRight="10dp"
         android:text="logout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_edit"
+        app:layout_constraintTop_toBottomOf="@+id/profileBirthdate" />
+
+    <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/btn_logout_design"
+        android:onClick="logOut"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="edit"
+        app:layout_constraintEnd_toStartOf="@+id/btn_logout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/profileBirthdate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
