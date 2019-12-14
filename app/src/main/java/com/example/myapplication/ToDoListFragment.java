@@ -92,6 +92,7 @@ public class ToDoListFragment extends ListFragment {
         mAdapter = new ToDoListAdapter(getActivity());
         setListAdapter(mAdapter);
 
+        //removing item when pressed long
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
