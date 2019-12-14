@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,6 +37,7 @@ public class Schedule extends AppCompatActivity {
     Toolbar toolbar;
     ToDoListAdapterForSchedule mAdapter;
     ListView listView;
+    FloatingActionButton fab;
 
     private FirebaseFirestore db;
     CollectionReference academicClassesUsers;
@@ -51,7 +56,7 @@ public class Schedule extends AppCompatActivity {
         if(firebaseUser != null){
             userId = firebaseUser.getUid();
             academicClassesUsers = db.collection("Users").document(userId).collection("AcademicClasses");
-            //getDatabase();
+            getDatabase();
         }
 
         listView = findViewById(R.id.listview);
@@ -69,12 +74,34 @@ public class Schedule extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(Schedule.this, Menu.class));
                 finish();
+            }
+        });
+
+        fab =(FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(Schedule.this, AddSchedule.class);
+                startActivity(myIntent);
             }
         });
 
         mAdapter = new ToDoListAdapterForSchedule(this);
         listView.setAdapter(mAdapter);
+
+        //removing item when pressed long
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                mAdapter.remove(position);
+
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
     }
 
     //Get toDoItem from database
@@ -107,6 +134,6 @@ public class Schedule extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        getDatabase();
+        //getDatabase();
     }
 }
