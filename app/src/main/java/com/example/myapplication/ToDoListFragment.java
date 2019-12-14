@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -68,6 +70,10 @@ public class ToDoListFragment extends ListFragment {
     FirebaseUser firebaseUser;
 
     ListView list;
+
+    FragmentManager fm;
+    FragmentTransaction ft;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -287,8 +293,20 @@ public class ToDoListFragment extends ListFragment {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(d.getDate(KEY_CALENDAR));
                         String details = d.getString(KEY_DETAILS);
+                        fm = getFragmentManager();
+                        ft = fm.beginTransaction();
 
-                        mAdapter.add(new ToDoItem(category,title,subject,type,priority,status,calendar,details));
+                        //SEPARATES EXAMS FROM TASKS
+                        if (fm.findFragmentByTag("MY_FRAGMENT_EXAM").isVisible()){
+                            if(category.equals("Exam")){
+                                mAdapter.add(new ToDoItem(category,title,subject,type,priority,status,calendar,details));
+                            }
+                        }else{
+                            if(category.equals("Task")){
+                                mAdapter.add(new ToDoItem(category,title,subject,type,priority,status,calendar,details));
+                            }
+                        }
+
                         mAdapter.notifyDataSetChanged();
                     }
                 }

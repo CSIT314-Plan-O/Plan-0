@@ -57,7 +57,7 @@ public class Reminder extends AppCompatActivity  {
         if(firebaseUser != null){
             userId = firebaseUser.getUid();
             toDoItemsUsers = db.collection("Users").document(userId).collection("ToDoItems");
-            //getDatabase();
+            getDatabase();
         }
 
         listView = findViewById(R.id.listview);
@@ -74,6 +74,7 @@ public class Reminder extends AppCompatActivity  {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(Reminder.this, Menu.class));
                 finish();
             }
         });
@@ -126,10 +127,4 @@ public class Reminder extends AppCompatActivity  {
         });
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        getDatabase();
-    }
 }

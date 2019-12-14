@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,8 +88,12 @@ public class SignIn extends AppCompatActivity {
                                     userId = mFirebaseAuth.getCurrentUser().getUid();
                                     documentReference = db.collection("Users").document(userId);
 
+                                    Calendar setCalendar = Calendar.getInstance();
+                                    setCalendar.set(1900,0,1);
+
                                     Map<String, Object> user = new HashMap<>();
                                     user.put("Email", emailText.getText().toString());
+                                    user.put("Birthdate", setCalendar.getTime());
 
                                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override

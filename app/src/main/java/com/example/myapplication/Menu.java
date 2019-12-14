@@ -33,6 +33,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int ADD_TODO_ITEM_REQUEST = 0;
@@ -61,7 +62,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
     ToDoListFragment tasksFragment;
     ToDoListFragment examsFragment;
-    ToDoListFragment remindersFragment;
 
     DocumentReference documentReference;
     String userId;
@@ -176,6 +176,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
         ToDoListFragment myFragment = (ToDoListFragment) getFragmentManager().findFragmentByTag("MY_FRAGMENT_TASK");
         ToDoListFragment myFragment2 = (ToDoListFragment) getFragmentManager().findFragmentByTag("MY_FRAGMENT_EXAM");
+
         if (myFragment != null && myFragment.isVisible()) {
             myFragment.onActivityResult(requestCode, resultCode, data);
         }

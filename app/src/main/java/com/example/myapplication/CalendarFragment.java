@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -120,6 +121,7 @@ public class CalendarFragment extends Fragment {
                 builder.setTitle("Tasks/Exams : " + date);
 
                 //set linear layout
+                ScrollView scrollView = new ScrollView(getActivity());
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -186,7 +188,9 @@ public class CalendarFragment extends Fragment {
 
                 linearLayout.setPadding(10,10,10,10);
 
-                builder.setView(linearLayout);
+                scrollView.addView(linearLayout);
+
+                builder.setView(scrollView);
 
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
