@@ -37,6 +37,9 @@ public class ToDoListAdapterForSchedule extends BaseAdapter{
         mItems.add(item);
     }
 
+    public void remove(int position) {
+        mItems.remove(position);
+    }
 
     @Override
     public int getCount() {
