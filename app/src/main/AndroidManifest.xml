@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProfile"
+        <activity android:name=".Reminder"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".EditProfile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Schedule"
             android:screenOrientation="portrait"
@@ -46,10 +50,6 @@
         <activity
             android:name=".AddTask"
             android:label="@string/add_task"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".AddReminder"
-            android:label="@string/add_reminder"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Menu"
