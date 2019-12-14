@@ -107,14 +107,13 @@ public class CalendarFragment extends Fragment {
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-                Calendar clickedDayCalendar = eventDay.getCalendar();
+                final Calendar clickedDayCalendar = eventDay.getCalendar();
 
                 int year = clickedDayCalendar.get(Calendar.YEAR);
                 int month = clickedDayCalendar.get(Calendar.MONTH);
                 int day = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
 
                 String date = year + "/" + month + "/" + day;
-                Toast.makeText(getContext(), date, Toast.LENGTH_SHORT).show();
 
                 //Create alertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -122,12 +121,69 @@ public class CalendarFragment extends Fragment {
 
                 //set linear layout
                 LinearLayout linearLayout = new LinearLayout(getActivity());
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+
 
                 //views to set in dialog
                 TextView text = new TextView(getActivity());
-                text.setText("hello");
+                text.setText("--------------------------------------\n");
+
+                final TextView text2 = new TextView(getActivity());
+                //check if events array exist in calendar
+
+                toDoItemsUsers.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+                            String tasksOrExams = "";
+
+                            for (int i=0; i< events.size(); i++){
+                                if(events.get(i).getCalendar() == clickedDayCalendar){
+
+                                    final int finalI = i;
+
+                                    for(DocumentSnapshot d : list){
+
+                                        Calendar myCalendar = Calendar.getInstance();
+                                        myCalendar.setTime(d.getDate("Calendar"));
+
+                                        int year = myCalendar.get(Calendar.YEAR);
+                                        int month = myCalendar.get(Calendar.MONTH);
+                                        int day = myCalendar.get(Calendar.DAY_OF_MONTH);
+                                        if(events.get(i).getCalendar().get(Calendar.YEAR) == year &&
+                                                events.get(i).getCalendar().get(Calendar.MONTH) == month &&
+                                                events.get(i).getCalendar().get(Calendar.DAY_OF_MONTH) == day){
+
+                                           tasksOrExams +=  "Category: " + d.getString("Category") + "\n" +
+                                                            "Title: " + d.getString("Title") + "\n" +
+                                                            "Type: " + d.getString("Type") + "\n" +
+                                                            "Subject: " + d.getString("Subject" ) + "\n\n" +
+                                                            "--------------------------------------\n\n";
+                                           // break;
+                                        }
+
+
+                                    }
+
+                                }
+
+                            }
+                            text2.setText(tasksOrExams);
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "INSERTION OF DATA IS SUCCESS");
+                    }
+                });
 
                 linearLayout.addView(text);
+                linearLayout.addView(text2);
+
                 linearLayout.setPadding(10,10,10,10);
 
                 builder.setView(linearLayout);
