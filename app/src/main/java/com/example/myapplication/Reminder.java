@@ -9,14 +9,11 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,20 +24,24 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Calendar;
 import java.util.List;
 
-public class Schedule extends AppCompatActivity {
+public class Reminder extends AppCompatActivity  {
 
-    private static final String KEY_CLASS = "Class";
-    private static final String KEY_TIMING = "Timing";
-
+    private static final String KEY_CATEGORY = "Category";
+    private static final String KEY_TITLE = "Title";
+    private static final String KEY_SUBJECT = "Subject";
+    private static final String KEY_TYPE = "Type";
+    private static final String KEY_PRIORITY = "Priority";
+    private static final String KEY_STATUS = "Status";
+    private static final String KEY_CALENDAR = "Calendar";
+    private static final String KEY_DETAILS = "Details";
     private static final String TAG = "-----------------------";
 
     Toolbar toolbar;
-    ToDoListAdapterForSchedule mAdapter;
+    ToDoListAdapterForReminder mAdapter;
     ListView listView;
-    FloatingActionButton fab;
 
     private FirebaseFirestore db;
-    CollectionReference academicClassesUsers;
+    CollectionReference toDoItemsUsers;
     FirebaseAuth firebaseAuth;
     String userId;
     FirebaseUser firebaseUser;
@@ -48,22 +49,21 @@ public class Schedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        setContentView(R.layout.activity_reminder);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
             userId = firebaseUser.getUid();
-            academicClassesUsers = db.collection("Users").document(userId).collection("AcademicClasses");
-            getDatabase();
+            toDoItemsUsers = db.collection("Users").document(userId).collection("ToDoItems");
+            //getDatabase();
         }
 
         listView = findViewById(R.id.listview);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Schedule");
+        getSupportActionBar().setTitle("Reminder");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final Drawable goBack = getResources().getDrawable(R.drawable.ic_go_back);
@@ -74,39 +74,17 @@ public class Schedule extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Schedule.this, Menu.class));
                 finish();
             }
         });
 
-        fab =(FloatingActionButton)findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(Schedule.this, AddSchedule.class);
-                startActivity(myIntent);
-            }
-        });
-
-        mAdapter = new ToDoListAdapterForSchedule(this);
+        mAdapter = new ToDoListAdapterForReminder(this);
         listView.setAdapter(mAdapter);
-
-        //removing item when pressed long
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                mAdapter.remove(position);
-
-                mAdapter.notifyDataSetChanged();
-                return false;
-            }
-        });
     }
 
     //Get toDoItem from database
     public void getDatabase(){
-        academicClassesUsers.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        toDoItemsUsers.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if(!queryDocumentSnapshots.isEmpty()){
@@ -114,10 +92,28 @@ public class Schedule extends AppCompatActivity {
 
                     for(DocumentSnapshot d : list){
 
-                        String academicClass = d.getString(KEY_CLASS);
-                        String timing = d.getString(KEY_TIMING);
+                        String category = d.getString(KEY_CATEGORY);
+                        String title = d.getString(KEY_TITLE);
+                        String subject = d.getString(KEY_SUBJECT);
+                        String type = d.getString(KEY_TYPE);
+                        ToDoItem.Priority priority;
+                        if(d.getString(KEY_PRIORITY).equals("LOW")){
+                            priority = ToDoItem.Priority.LOW;
+                        }else{
+                            priority = ToDoItem.Priority.HIGH;
+                        }
+                        ToDoItem.Status status;
+                        if(d.getString(KEY_STATUS).equals("DONE")){
+                            status = ToDoItem.Status.DONE;
+                        }else{
+                            status = ToDoItem.Status.NOTDONE;
+                        }
 
-                        mAdapter.add(new AcademicClass(academicClass, timing));
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(d.getDate(KEY_CALENDAR));
+                        String details = d.getString(KEY_DETAILS);
+
+                        mAdapter.add(new ToDoItem(category,title,subject,type,priority,status,calendar,details));
                         mAdapter.notifyDataSetChanged();
                     }
                 }
@@ -134,6 +130,6 @@ public class Schedule extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        //getDatabase();
+        getDatabase();
     }
 }

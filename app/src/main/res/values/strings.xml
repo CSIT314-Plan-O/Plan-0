@@ -9,7 +9,6 @@
 
     <string name="add_task">Add Task</string>
     <string name="add_exam">Add Exam</string>
-    <string name="add_reminder">Add Reminder</string>
 
     <string name="priority_string">Priority: </string>
     <string name="date_string">Date:</string>

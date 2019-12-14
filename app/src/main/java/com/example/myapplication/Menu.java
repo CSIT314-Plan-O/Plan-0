@@ -99,9 +99,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                if (index == REMINDERS)
-                    intent = new Intent(Menu.this, AddReminder.class);
-                else if (index == TASKS)
+                if (index == TASKS)
                     intent = new Intent(Menu.this, AddTask.class);
                 else if (index == EXAMS)
                     intent = new Intent(Menu.this, AddExam.class);
@@ -212,11 +210,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                                 getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
                                         .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
                             }
-                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_REMINDER") != null){
-                                //if the other fragment is visible, hide it.
-                                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
-                                        .findFragmentByTag("MY_FRAGMENT_REMINDER")).commit();
-                            }
                             ft.commit();
                             break;
                         case R.id.action_calendar:
@@ -241,11 +234,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                                 //if the other fragment is visible, hide it.
                                 ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
                             }
-                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_REMINDER") != null){
-                                //if the other fragment is visible, hide it.
-                                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
-                                        .findFragmentByTag("MY_FRAGMENT_REMINDER")).commit();
-                            }
                             ft.commit();
                             break;
                         case R.id.action_task:
@@ -269,11 +257,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                                 getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
                                         .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
                             }
-                            if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_REMINDER") != null){
-                                //if the other fragment is visible, hide it.
-                                getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
-                                        .findFragmentByTag("MY_FRAGMENT_REMINDER")).commit();
-                            }
                             ft.commit();
                             break;
                     }
@@ -285,39 +268,12 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     //navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment selectedFragment = new ReminderFragment();
         switch (menuItem.getItemId()){
             case R.id.nav_schedule:
                 startActivity(new Intent(this, Schedule.class));
                 break;
             case R.id.nav_reminder:
-                getSupportActionBar().setTitle("Reminder");
-                fm = getFragmentManager();
-                ft = fm.beginTransaction();
-                if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_REMINDER") != null) {
-                    //if the fragment exists, show it.
-                    getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager()
-                            .findFragmentByTag("MY_FRAGMENT_REMINDER")).commit();
-                } else {
-                    //if the fragment does not exist, add it to fragment manager.
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
-                            selectedFragment, "MY_FRAGMENT_REMINDER").commit();
-                }
-                if(fm.findFragmentByTag("MY_FRAGMENT_EXAM") != null){
-                    //if the other fragment is visible, hide it.
-                    ft.hide(fm.findFragmentByTag("MY_FRAGMENT_EXAM"));
-                }
-                if(fm.findFragmentByTag("MY_FRAGMENT_TASK") != null){
-                    //if the other fragment is visible, hide it.
-                    ft.hide(fm.findFragmentByTag("MY_FRAGMENT_TASK"));
-                }
-                if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_CALENDAR") != null){
-                    //if the other fragment is visible, hide it.
-                    getSupportFragmentManager().beginTransaction().hide(getSupportFragmentManager()
-                            .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
-                }
-                ft.commit();
-                index=REMINDERS;
+                startActivity(new Intent(this, Reminder.class));
                 break;
             case R.id.nav_pomodoro:
                 startActivity(new Intent(this, Pomodoro.class));

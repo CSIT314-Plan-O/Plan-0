@@ -97,14 +97,7 @@ public class ToDoListFragment extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                SparseBooleanArray positionChecker = list.getCheckedItemPositions();
-                int count = list.getCount();
-
-                for(int item=count-1; item>0; item--){
-                    if(positionChecker.get(item)){
-                        mAdapter.remove(item);
-                    }
-                }
+                mAdapter.remove(position);
 
                 mAdapter.notifyDataSetChanged();
                 return false;
