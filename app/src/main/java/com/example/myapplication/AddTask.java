@@ -95,6 +95,7 @@ public class AddTask extends AppCompatActivity {
                     ToDoItem.packageIntent(data, "EditTask", title, subject, type, priority, status, mCalendarDate, details);
                 } else
                     ToDoItem.packageIntent(data, "Task", title, subject, type, priority, status, mCalendarDate, details);
+
                 setResult(RESULT_OK, data);
                 finish();
                 return true;
