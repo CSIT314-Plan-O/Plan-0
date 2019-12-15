@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -195,6 +196,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                     switch(menuItem.getItemId()){
                         case R.id.action_exam:
                             index = EXAMS;
+                            fab.show(); //show floating action button
                             fm = getFragmentManager();
                             ft = fm.beginTransaction();
                             getSupportActionBar().setTitle("Exam");
@@ -214,6 +216,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                             ft.commit();
                             break;
                         case R.id.action_calendar:
+                            fab.hide(); //hide floating action button
                             fm = getFragmentManager();
                             ft = fm.beginTransaction();
                             getSupportActionBar().setTitle("Calendar");
@@ -239,6 +242,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                             break;
                         case R.id.action_task:
                             index = TASKS;
+                            fab.show(); //show floating action button
                             fm = getFragmentManager();
                             ft = fm.beginTransaction();
                             getSupportActionBar().setTitle("Task");
