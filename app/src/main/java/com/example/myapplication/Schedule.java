@@ -14,14 +14,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
@@ -96,8 +99,25 @@ public class Schedule extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                mAdapter.remove(position);
+                academicClassesUsers.whereEqualTo("Class", mAdapter.getClass(position)).whereEqualTo("Timing", mAdapter.getTiming(position))
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                //update user info
+                                db.collection("Users").document(userId)
+                                        .collection("AcademicClasses").document(document.getId())
+                                        .delete();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+                mAdapter.remove(position);
                 mAdapter.notifyDataSetChanged();
                 return false;
             }
