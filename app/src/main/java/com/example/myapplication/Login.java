@@ -171,6 +171,7 @@ public class Login extends AppCompatActivity {
         LinearLayout linearLayout = new LinearLayout(this);
 
         //views to set in dialog
+
         final EditText mEmailText = new EditText(this);
         mEmailText.setHint("Email");
         mEmailText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
