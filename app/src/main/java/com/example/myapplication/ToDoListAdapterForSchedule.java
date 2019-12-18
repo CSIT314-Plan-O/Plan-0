@@ -56,6 +56,14 @@ public class ToDoListAdapterForSchedule extends BaseAdapter{
         return pos;
     }
 
+    public String getClass(int pos){
+        return  mItems.get(pos).getmClass();
+    }
+
+    public String getTiming(int pos){
+        return mItems.get(pos).getmTiming();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final AcademicClass classItem = mItems.get(position);

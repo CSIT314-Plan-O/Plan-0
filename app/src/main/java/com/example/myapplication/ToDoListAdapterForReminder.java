@@ -96,6 +96,14 @@ public class ToDoListAdapterForReminder extends BaseAdapter{
         return pos;
     }
 
+    public String getKeyCategory(int pos){
+        return  mItems.get(pos).getCategory();
+    }
+
+    public String getKeyTitle(int pos){
+        return mItems.get(pos).getTitle();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ToDoItem toDoItem = mItems.get(position);
