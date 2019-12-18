@@ -226,8 +226,13 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
                             if(getSupportFragmentManager().findFragmentByTag("MY_FRAGMENT_CALENDAR") != null) {
                                 //if the fragment exists, show it.
-                                getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager()
-                                        .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
+//                                getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager()
+//                                        .findFragmentByTag("MY_FRAGMENT_CALENDAR")).commit();
+
+                                //Use add instead of show so that the screen is refreshed all the time
+                                //So if a data has been removed, the icons will be removed too
+                                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+                                        selectedFragment, "MY_FRAGMENT_CALENDAR").commit();
                             } else {
                                 //if the fragment does not exist, add it to fragment manager.
                                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
