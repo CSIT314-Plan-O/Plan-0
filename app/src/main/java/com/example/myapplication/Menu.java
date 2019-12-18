@@ -50,7 +50,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
 
     int index;
-    TextView headerEmail;
+    TextView headerEmail, headerName;
     NavigationView navigationView;
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
@@ -90,6 +90,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView = findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
         headerEmail = (TextView) hView.findViewById(R.id.headerEmail); //initialize headerEmail from navView
+        headerName = (TextView) hView.findViewById(R.id.headerName); //initialize headerName from navView
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
@@ -158,8 +159,10 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     String email = documentSnapshot.getString("Email");
+                    String name = documentSnapshot.getString("Name");
 
                     headerEmail.setText(email);
+                    headerName.setText(name);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
