@@ -103,9 +103,27 @@ public class ToDoListFragment extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                mAdapter.remove(position);
+                toDoItemsUsers.whereEqualTo("Category", mAdapter.getKeyCategory(position)).whereEqualTo("Title", mAdapter.getKeyTitle(position))
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                //update user info
+                                db.collection("Users").document(userId)
+                                        .collection("ToDoItems").document(document.getId())
+                                        .delete();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+                mAdapter.remove(position);
                 mAdapter.notifyDataSetChanged();
+
                 return false;
             }
         });
